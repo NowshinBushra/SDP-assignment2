@@ -71,7 +71,7 @@ const handleAddToCart = (id, name) => {
     const div = document.createElement("div");
     div.classList.add("orders")
     div.innerHTML = `
-        <h5>${drinkCount}</h5>
+        <h5>${drinkCount}.</h5>
         <h5>${name}</h5>
     `;
     container.appendChild(div);
