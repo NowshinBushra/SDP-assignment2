@@ -13,13 +13,9 @@
 }
 .card{
     border: 1px solid black;
-    padding: 0px 10px 10px 10px;
+    padding-bottom: 3rem;
+    margin: 3rem;
 }
-.card-img{
-    width: 200px;
-}
-
-
 
 
 .cart-container{

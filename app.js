@@ -17,7 +17,7 @@ const displayItem = (items) => {
 
         item.forEach(element => {
             const div = document.createElement("div");
-            div.classList.add("card");
+            // div.classList.add("card");
 
             console.log(element);
 
@@ -35,9 +35,9 @@ const displayItem = (items) => {
             itemContainer.appendChild(div);
         });
     });
-}
+};
 
-
+//-------------------------------------------------------------------------------------
 const handleAddToCart = (id, name) => {
     console.log(id, name);
     const container = document.getElementById("cart-items");
@@ -52,6 +52,25 @@ const handleAddToCart = (id, name) => {
     `;
     container.appendChild(div)
 };
+//------------------------------------------------------------------------------------------
+
+const searchItem = () => {
+    
+
+    const url = ``;
+
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        if (data.length == 0){
+            showError();
+        }
+    else{
+        showSearchResult(data);
+    }
+    });
+}
+//------------------------------------------------------------------------------------------
 
 const getSingleItem = (id) => {
     console.log(id);
@@ -62,11 +81,11 @@ const getSingleItem = (id) => {
 
 const showDetail = (item) => {
     // console.log(item);
-    const itemDetail = document.getElementsByClassName("modal-body");
+    const itemDetail = document.getElementById("modal-body");
 
     let showItem = Object.values(item);
     showItem.forEach(element => {
-        // console.log(element);
+        console.log(element);
         element.forEach(e => {
             console.log(e);
 
