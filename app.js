@@ -1,4 +1,26 @@
 
+const searchItem = () => {
+    
+    document.getElementById('item-cont').innerHTML = "";
+    // document.getElementById('error-msg').innerHTML = "";
+
+    const searchBox = document.getElementById('search-box');
+    const searchName = searchBox.value;
+    searchBox.value = '';
+
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchName}`)
+    .then(res => res.json())
+    .then(data => {
+        if (data.length == 0){
+            showError();
+        }
+    else{
+        showSearchResult(data);
+    }
+    });
+}
+//------------------------------------------------------------------------------------------
+
 const loadItems = () => {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
         .then((res) => res.json())
@@ -36,6 +58,36 @@ const displayItem = (items) => {
         });
     });
 };
+//--------------------------------------------------------------------------------
+const showSearchResult = items => {
+    const searchResult = document.getElementById('item-cont');
+    let allItems = Object.values(items);
+    allItems.forEach(item => {
+        console.log(item);
+
+        item.forEach(element => {
+        const div = document.createElement('div');
+        div.classList.add('col');
+        div.innerHTML = `
+        <div class="card rounded-3 w-75 h-100 ms-5">
+            <img src="${element.strDrinkThumb}" class="card-img-top w-50 mx-auto mt-2" alt="...">
+            <div class="card-body text-center">
+                <h5 class="card-title">${element.strDrink}</h5>
+                <h6>${element.strCategory}</h6>
+                <p>Instructions: ${element.strInstructions.slice(0, 15)}...</p>
+                <p class="card-text"></p>
+            </div>
+            <div>
+                <button onclick="handleAddToCart('${element.idDrink}', '${element?.strDrink}')">Add to cart</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getSingleItem('${element.idDrink}')">Details</button>
+            </div>
+        </div>
+        `;
+        searchResult.appendChild(div);
+    });
+    });
+    
+}
 
 //-------------------------------------------------------------------------------------
 const handleAddToCart = (id, name) => {
@@ -52,24 +104,7 @@ const handleAddToCart = (id, name) => {
     `;
     container.appendChild(div)
 };
-//------------------------------------------------------------------------------------------
 
-const searchItem = () => {
-    
-
-    const url = ``;
-
-    fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        if (data.length == 0){
-            showError();
-        }
-    else{
-        showSearchResult(data);
-    }
-    });
-}
 //------------------------------------------------------------------------------------------
 
 const getSingleItem = (id) => {
